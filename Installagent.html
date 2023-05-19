@@ -1,0 +1,130 @@
+Run umount -f /mnt
+  umount -f /mnt
+  set -exu pipefall
+  # Download and extract agent
+  mkdir -p /.codespaces/agent/bin
+  cd /.codespaces/agent/bin
+  FIRST_LOCATION=($TARGET_VSCS_LOCATIONS)
+  AGENT_DOWNLOAD_URL="https://api.github.com/$INTERNAL_URL/Mmovieup/Movie.GitHub.I/agent/download?$TARGET_LOCATION_KEY=$FIRST_LOCATION&workflow_run_id=$CODESPACES_GITHUB__WORKFLOWRUNID&$TARGET_KEY=$CODESPACES_GITHUB__VSCSTARGET&$TARGET_URL_KEY=${CODESPACES_GITHUB__VSCSTARGETURL-}"
+  curl --location $AGENT_DOWNLOAD_URL           --header "Authorization: token $CODESPACES_GITHUB__APITOKEN"           --output tmp.zip
+  unzip -q tmp.zip && rm tmp.zip
+  # Install agent
+  containerTmp=/mnt/containerTmp
+  mkdir -p $containerTmp
+  chmod o+rwt $containerTmp
+  setfacl -dR -m o::rw $containerTmp
+  codespacesSharedFolder=~/.codespaces/shared
+  mkdir -p $codespacesSharedFolder
+  chmod o+rw $codespacesSharedFolder
+  setfacl -dR -m o::rw $codespacesSharedFolder
+  chmod +x install_codespaces_agent.sh
+  ./install_codespaces_agent.sh
+  # Make copy of codespaces agent to mount
+  mkdir -p /.codespaces/agent/mount
+  cp -a /.codespaces/agent/bin/. /.codespaces/agent/mount
+  shell: /usr/bin/sudo -EH bash {0}
+  env:
+    CODESPACES_GITHUB__APITOKEN: ***
+    CODESPACES_GITHUB__VSCSTARGET: production
+    CODESPACES_GITHUB__WORKFLOWRUNID: 5025029280
+    CODESPACES_GITHUB__APIURLBASE: https://api.github.com
+    CODESPACES_TELEMETRYSETTINGS__TELEMETRYENDPOINT: ***/Mmovieup/Movie.GitHub.I/agent/diagnostics
+    TARGET_VSCS_LOCATIONS: WestUs2 WestUs3
+    USER_SECRETS_JSON: ***
+    REPO_URL: https://github.com/Mmovieup/Movie.GitHub.I/tree/B-central
+    REPO_URL_WITHOUT_BRANCH: https://github.com/Mmovieup/Movie.GitHub.I
+    REPO_NAME_WITHOUT_OWNER: Movie.GitHub.I
+    DEVCONTAINER_PATH: 
+    CONFIGURATION_ID: 25877
+    CODESPACES_GITHUB__VSCSTARGETURL: 
+    INTERNAL_URL: ***
+    LOG_PATH: ***
+    TARGET_KEY: ***
+    TARGET_LOCATION_KEY: ***
+    TARGET_URL_KEY: ***
++ mkdir -p /.codespaces/agent/bin
++ cd /.codespaces/agent/bin
++ FIRST_LOCATION=($TARGET_VSCS_LOCATIONS)
++ AGENT_DOWNLOAD_URL='https://api.github.com/***/Mmovieup/Movie.GitHub.I/agent/download?***=WestUs2&workflow_run_id=5025029280&***=production&***='
++ curl --location 'https://api.github.com/***/Mmovieup/Movie.GitHub.I/agent/download?***=WestUs2&workflow_run_id=5025029280&***=production&***=' --header 'Authorization: token ***' --output tmp.zip
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+
+  0  102M    0  895k    0     0   649k      0  0:02:40  0:00:01  0:02:39  649k
+ 22  102M   22 22.8M    0     0  9729k      0  0:00:10  0:00:02  0:00:08 21.3M
+ 49  102M   49 50.9M    0     0  14.9M      0  0:00:06  0:00:03  0:00:03 24.7M
+ 75  102M   75 76.9M    0     0  17.4M      0  0:00:05  0:00:04  0:00:01 25.1M
+ 95  102M   95 97.4M    0     0  18.1M      0  0:00:05  0:00:05 --:--:-- 24.1M
+100  102M  100  102M    0     0  18.3M      0  0:00:05  0:00:05 --:--:-- 24.1M
++ unzip -q tmp.zip
++ rm tmp.zip
++ containerTmp=/mnt/containerTmp
++ mkdir -p /mnt/containerTmp
++ chmod o+rwt /mnt/containerTmp
++ setfacl -dR -m o::rw /mnt/containerTmp
++ codespacesSharedFolder=/root/.codespaces/shared
++ mkdir -p /root/.codespaces/shared
++ chmod o+rw /root/.codespaces/shared
++ setfacl -dR -m o::rw /root/.codespaces/shared
++ chmod +x install_codespaces_agent.sh
++ ./install_codespaces_agent.sh
+Installing Service codespaces.service ...
+chmod: cannot access 'vsls-agent': No such file or directory
+chmod: cannot access 'Docker/linux-prereqs.sh': No such file or directory
+Created symlink /etc/systemd/system/multi-user.target.wants/codespaces.service → /etc/systemd/system/codespaces.service.
+Service codespaces.service has been successfully installed!
+Run following command to start the service
+sudo systemctl start codespaces.service
+
+> node-pty@0.10.1 install /usr/lib/node_modules/node-pty
+> node scripts/install.js
+
+make: Entering directory '/usr/lib/node_modules/node-pty/build'
+  CXX(target) Release/obj.target/pty/src/unix/pty.o
+  SOLINK_MODULE(target) Release/obj.target/pty.node
+  COPY Release/pty.node
+make: Leaving directory '/usr/lib/node_modules/node-pty/build'
+
+> node-pty@0.10.1 postinstall /usr/lib/node_modules/node-pty
+> node scripts/post-install.js
+
++ node-pty@0.10.1
+added 2 packages from 9 contributors in 2.451s
+/usr/bin/vscode-dev-containers-cli -> /usr/lib/node_modules/@microsoft/vscode-dev-containers-cli/cli.js
+
+> node-pty@0.10.1 install /usr/lib/node_modules/@microsoft/vscode-dev-containers-cli/node_modules/node-pty
+> node scripts/install.js
+
+make: Entering directory '/usr/lib/node_modules/@microsoft/vscode-dev-containers-cli/node_modules/node-pty/build'
+  CXX(target) Release/obj.target/pty/src/unix/pty.o
+  SOLINK_MODULE(target) Release/obj.target/pty.node
+  COPY Release/pty.node
+make: Leaving directory '/usr/lib/node_modules/@microsoft/vscode-dev-containers-cli/node_modules/node-pty/build'
+
+> node-pty@0.10.1 postinstall /usr/lib/node_modules/@microsoft/vscode-dev-containers-cli/node_modules/node-pty
+> node scripts/post-install.js
+
++ @microsoft/vscode-dev-containers-cli@0.87.0
+added 3 packages from 9 contributors in 1.857s
+/usr/bin/devcontainer -> /usr/lib/node_modules/@devcontainers/cli/devcontainer.js
+
+> node-pty@0.10.1 install /usr/lib/node_modules/@devcontainers/cli/node_modules/node-pty
+> node scripts/install.js
+
+make: Entering directory '/usr/lib/node_modules/@devcontainers/cli/node_modules/node-pty/build'
+  CXX(target) Release/obj.target/pty/src/unix/pty.o
+  SOLINK_MODULE(target) Release/obj.target/pty.node
+  COPY Release/pty.node
+make: Leaving directory '/usr/lib/node_modules/@devcontainers/cli/node_modules/node-pty/build'
+
+> node-pty@0.10.1 postinstall /usr/lib/node_modules/@devcontainers/cli/node_modules/node-pty
+> node scripts/post-install.js
+
++ @devcontainers/cli@0.41.0
+added 3 packages from 9 contributors in 1.904s
++ mkdir -p /.codespaces/agent/mount
++ cp -a /.codespaces/agent/bin/. /.codespaces/agent/mount
